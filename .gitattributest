@@ -1,1 +1,2 @@
+*.sql diff
 *.sql linguist-language=sql
