@@ -1,6 +1,1 @@
-SELECT *
-FROM sql_store.customers
-WHERE last_name LIKE 'b%';
-
--- % any number of characters
--- _ single character
+䕓䕌呃⨠䘊佒⁍煳彬瑳牯⹥畣瑳浯牥ੳ䡗剅⁅慬瑳湟浡⁥䥌䕋✠╢㬧ਊⴭ┠愠祮渠浵敢⁲景挠慨慲瑣牥ੳⴭ张猠湩汧⁥档牡捡整ੲⴊ‭敇⁴桴⁥畣瑳浯牥⁳桷獯੥ⴭ愠摤敲獳獥挠湯慴湩吠䅒䱉漠⁲噁久䕕ⴊ‭桰湯⁥畮扭牥⁳湥⁤楷桴㤠ਊ
