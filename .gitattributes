@@ -2,4 +2,4 @@
 #*.sql text working-tree-encoding=UTF-16 eol=CRLF
 #*.sql text working-tree-encoding=UTF-16LE eol=CRLF
 #*.sql diff
-*.sql linguist-language=sql
+#*.sql linguist-language=sql
