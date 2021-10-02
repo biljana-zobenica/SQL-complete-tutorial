@@ -1,1 +1,20 @@
-䕓䕌呃⨠䘊佒⁍煳彬瑳牯⹥畣瑳浯牥ੳ䡗剅⁅慬瑳湟浡⁥䥌䕋✠╢㬧ਊⴭ┠愠祮渠浵敢⁲景挠慨慲瑣牥ੳⴭ张猠湩汧⁥档牡捡整ੲⴊ‭敇⁴桴⁥畣瑳浯牥⁳桷獯੥ⴭ愠摤敲獳獥挠湯慴湩吠䅒䱉漠⁲噁久䕕ⴊ‭桰湯⁥畮扭牥⁳湥⁤楷桴㤠ਊ
+SELECT *
+FROM sql_store.customers
+WHERE last_name LIKE 'b%';
+
+-- % any number of characters
+-- _ single character
+
+-- Get the customers whose
+-- addresses contain TRAIL or AVENUE
+-- phone numbers ending with 9
+
+SELECT *
+FROM sql_store.customers
+WHERE 	address LIKE '%trail%' OR 
+		address LIKE '%avenue%';
+
+SELECT *
+FROM sql_store.customers
+WHERE phone LIKE '%9';
+
