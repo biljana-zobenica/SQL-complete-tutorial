@@ -2,7 +2,7 @@
 An SQL complete tutorial, from beginner to advanced, covering MySQL database fundamentals and advanced topics. It's created by Mosh Hamedani.
 
 It covers the following topics:
-* Write complex SQL queries
+* Complex SQL queries
 * Joins (inner, outer, natural, cross)
 * Views
 * Stored procedures
