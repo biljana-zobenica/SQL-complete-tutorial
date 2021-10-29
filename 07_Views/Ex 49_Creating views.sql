@@ -1,7 +1,7 @@
 USE sql_invoicing;
 
 -- create a view
-CREATE VIEW sales_by_client AS
+CREATE OR REPLACE VIEW sales_by_client AS
 SELECT 
 	c.client_id,
     c.name,
