@@ -22,7 +22,7 @@ DELIMITER ;
 
 CALL get_invoices_with_balance();.
 
--- use the created view
+-- use the created view within a stored procedure
 DELIMITER $$
 CREATE PROCEDURE get_invoices_with_balance_view()
 BEGIN
