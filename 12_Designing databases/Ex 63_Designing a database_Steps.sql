@@ -6,4 +6,4 @@
 
 -- CONCEPTUAL MODEL 	-> represents the entities and their relationships.
 -- LOGICAL MODEL 		-> creating relationships between entities; more details than the conceptual model.
--- PHYSICAL MODEL		-> the implementation of logical model in mySQL.
+-- PHYSICAL MODEL		-> the implementation of logical model in mySQL.courses
