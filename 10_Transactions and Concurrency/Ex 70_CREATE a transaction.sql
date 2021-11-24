@@ -28,3 +28,9 @@ Concurrency problems:
 SHOW VARIABLES LIKE 'transaction_isolation';
 SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE; -- only for the current session;
 SET GLOBAL TRANSACTION ISOLATION LEVEL SERIALIZABLE; -- set it globally;
+
+-- ISOLATION LEVELS --
+-- 1. READ UNCOMMITTED - the lowest isolation level with all concurrency problems;
+-- 2. READ COMMITTED - here we don't have dirty reads, but do have unrepeatable or inconsistent reads.
+-- 3. REPEATABLE READ - this is the DEFAULT isolation level in mysql, which solves most of the concurrency problems (not phantom reads);
+-- 4. SERIALIZABLE - solves all concurrency problems, but has more locks, recourses which can hurt performances and reliability.
