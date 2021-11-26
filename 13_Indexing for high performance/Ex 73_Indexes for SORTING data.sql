@@ -9,6 +9,7 @@ we increase the complexity of the background processes of that index.
 
 -- Show MySQL server variables:
 SHOW STATUS;
+-- Show MySQL server variables associated to a query cost:
 SHOW STATUS LIKE 'last_query_cost';
 
 /* If we have an index on these columns a and b, 
