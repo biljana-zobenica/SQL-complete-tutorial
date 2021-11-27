@@ -125,21 +125,92 @@ WHERE year = 2012
 /* Write a query that surfaces all rows for top-10
  hits for which Ludacris is part of the Group. */
  
-
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+WHERE "group" LIKE '%ludacris%'
+	AND year_rank <= 10;
  
 /* Write a query that surfaces the top-ranked records
  in 1990, 2000, and 2010. */
  
-
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+WHERE year IN (1990, 2000, 2010)
+	AND year_rank = 1;
  
 /* Write a query that lists all songs from the 1960s 
 with "love" in the title. */
 
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+WHERE year BETWEEN 1960 AND 1969
+	AND song_name LIKE '%love%';
 
+-- OR
 
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+WHERE year_rank = 5 OR artist = 'Gotye';
+
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013
+   AND ("group" LIKE '%macklemore%' OR "group" LIKE '%timberlake%');
+
+/* Write a query that returns all rows for top-10 songs
+ that featured either Katy Perry or Bon Jovi. */
  
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+ WHERE year_rank <= 10
+   AND ("group" LIKE '%katy perry%' OR "group" LIKE '%bon jovi%');
+
+/* Write a query that returns all songs with titles that
+ contain the word "California" in either the 1970s or 1990s. */
  
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+ WHERE song_name LIKE '%california%'
+        AND (year BETWEEN 1970 AND 1979 OR year BETWEEN 1990 AND 1999);
+ 
+/* Write a query that lists all top-100 recordings that feature
+ Dr. Dre before 2001 or after 2009. */
 
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+ WHERE artist LIKE '%dr.dre%'
+	AND (year <= 2001 OR year >= 2009);
+    
+-- NOT
 
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+WHERE year = 2013
+	AND year_rank NOT BETWEEN 2 AND 3;
+    
+/* Using NOT with < and > usually doesn't make sense because
+ you can simply use the opposite comparative operator instead. 
+ NOT is commonly used with LIKE. */
+ 
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+WHERE year = 2013
+	AND "group" NOT LIKE '%macklemore%';
+    
+/* NOT is also frequently used to identify non-null rows, but the 
+syntax is somewhat special—you need to include IS beforehand. */
+
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+WHERE year = 2013
+	AND artist IS NOT NULL;
+    
+/* Write a query that returns all rows for songs that were on the 
+charts in 2013 and do not contain the letter "a". */
+
+SELECT *
+FROM tutorial.billboard_top_100_year_end
+WHERE year = 2013
+	AND song_name NOT LIKE '%a%';
 
  
