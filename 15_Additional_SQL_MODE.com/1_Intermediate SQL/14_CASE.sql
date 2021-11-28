@@ -165,13 +165,82 @@ GROUP BY CASE WHEN year = 'FR' THEN 'FR'
                WHEN year = 'SR' THEN 'SR'
                ELSE 'No Year Data' END; -- without AS year_group
 
-
+/* Write a query that counts the number of 300lb+ players for 
+each of the following regions: West Coast (CA, OR, WA), Texas,
+ and Other (everywhere else). */
   
+SELECT CASE WHEN state IN ('CA', 'OR', 'WA') THEN 'West Coast'
+            WHEN state = 'TX' THEN 'Texas'
+            ELSE 'Other' 
+            END AS state_group,
+            COUNT(*) AS count_players
+FROM benn.college_football_players
+WHERE weight >= 300
+GROUP BY 1;
 
+/* Write a query that calculates the combined weight of all 
+underclass players (FR/SO) in California as well as the combined
+ weight of all upperclass players (JR/SR) in California. */
 
+SELECT CASE WHEN year IN ('FR', 'SO') THEN 'underclass_players'
+            WHEN year IN ('JR', 'SR') THEN 'upperclass_players'
+            ELSE NULL 
+            END AS class_group,
+            SUM(weight) AS weight_sum_class
+FROM benn.college_football_players
+WHERE state = 'CA'
+GROUP BY 1;
 
+-- Using CASE inside of aggregate functions
 
+/* In the previous examples, data was displayed vertically,
+ but in some instances, you might want to show data horizontally.
+ This is known as "pivoting" (like a pivot table in Excel).
+ Let's take the following query: */
+ 
+SELECT CASE WHEN year = 'FR' THEN 'FR'
+            WHEN year = 'SO' THEN 'SO'
+            WHEN year = 'JR' THEN 'JR'
+            WHEN year = 'SR' THEN 'SR'
+            ELSE 'No Year Data' END AS year_group,
+            COUNT(1) AS count
+FROM benn.college_football_players
+GROUP BY 1;
 
+-- And re-orient it horizontally:
 
+SELECT COUNT(CASE WHEN year = 'FR' THEN 1 ELSE NULL END) AS fr_count,
+       COUNT(CASE WHEN year = 'SO' THEN 1 ELSE NULL END) AS so_count,
+       COUNT(CASE WHEN year = 'JR' THEN 1 ELSE NULL END) AS jr_count,
+       COUNT(CASE WHEN year = 'SR' THEN 1 ELSE NULL END) AS sr_count
+FROM benn.college_football_players;
 
+/* Pay attention to the COUNT function moving from vertical to horizontal approach. */
+
+/* Write a query that displays the number of players in each state,
+ with FR, SO, JR, and SR players in separate columns and another 
+ column for the total number of players. Order results such that 
+ states with the most players come first. */
+
+SELECT 	state,
+		COUNT(CASE WHEN year = 'FR' THEN 1 ELSE NULL END) AS fr_count,
+		COUNT(CASE WHEN year = 'SO' THEN 1 ELSE NULL END) AS so_count,
+		COUNT(CASE WHEN year = 'JR' THEN 1 ELSE NULL END) AS jr_count,
+		COUNT(CASE WHEN year = 'SR' THEN 1 ELSE NULL END) AS sr_count,
+		COUNT(*) AS total_players
+FROM benn.college_football_players
+GROUP BY 1
+ORDER BY 2 DESC;
+
+/* Write a query that shows the number of players at schools with
+ names that start with A through M, and the number at schools with
+ names starting with N - Z. */
+
+SELECT CASE WHEN school_name < 'n' THEN 'A-M'
+            WHEN school_name >= 'n' THEN 'N-Z'
+            ELSE NULL 
+            END AS school_name_group,
+       COUNT(1) AS players
+FROM benn.college_football_players
+GROUP BY 1;
 
