@@ -18,6 +18,7 @@ FROM tutorial.aapl_historical_stock_price
 ORDER BY year;
   
 -- Using DISTINCT in aggregations
+
 /* You can use DISTINCT when performing an aggregation.
  You'll probably use it most commonly with the COUNT function. */
  
