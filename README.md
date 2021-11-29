@@ -14,3 +14,5 @@ It covers the following topics:
 * Use indexing for performance
 * Design relational databases
 * Secure databases
+
+The last folder '15_Additional SQL' refers to the comprehensive SQL tutorial (from basic to advanced) on mode.com.
