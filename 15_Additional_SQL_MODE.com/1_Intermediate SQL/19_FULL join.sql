@@ -8,7 +8,7 @@ SELECT COUNT(CASE WHEN c.permalink IS NOT NULL AND a.company_permalink IS NULL
        COUNT(CASE WHEN c.permalink IS NOT NULL AND a.company_permalink IS NOT NULL
                   THEN c.permalink ELSE NULL END) AS both_tables,
        COUNT(CASE WHEN c.permalink IS NULL AND a.company_permalink IS NOT NULL
-                  THEN a.company_permalink ELSE NULL END) AS acquisitions_only
+                  THEN a.company_permalink ELSE NULL END) AS acquisitions_only -- *look at the note below
 FROM tutorial.crunchbase_companies c,
 FULL JOIN tutorial.crunchbase_acquisitions a
     ON c.permalink = a.company_permalink;
@@ -23,5 +23,19 @@ table—if you were to count companies.permalink as in the first two columns,
  tutorial.crunchbase_investments_part1 using a FULL JOIN. 
  Count up the number of rows that are matched/unmatched as 
  in the example above. */
+ 
+ SELECT COUNT(CASE WHEN c.permalink IS NOT NULL AND ip1.company_permalink IS NULL
+					THEN c.permalink ELSE NULL END) AS companies_only,
+		COUNT(CASE WHEN c.permalink IS NOT NULL AND ip1.company_permalink IS NOT NULL
+					THEN c.permalink ELSE NULL END) AS both_tables,
+		COUNT(CASE WHEN c.permalink IS NULL AND ip1.company_permalink IS NOT NULL
+					THEN ip1.company_permalink ELSE NULL END) AS investments_only 
+ FROM tutorial.crunchbase_companies c
+ FULL JOIN tutorial.crunchbase_investments_part1 ip1
+	ON c.permalink = ip1.company_permalink;
+ 
+ 
+ 
+ 
  
  
