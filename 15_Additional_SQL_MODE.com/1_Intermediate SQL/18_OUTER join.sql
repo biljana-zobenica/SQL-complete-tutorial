@@ -143,14 +143,28 @@ ORDER BY 1;
  and the number of unique investors in that company. Order by the number of investors
  from most to fewest. Limit to only companies in the state of New York. */
 
-
-
+SELECT 	c.name AS company_name,
+        c.status AS company_status,
+		COUNT(DISTINCT i.investor_name) AS unique_investors
+FROM tutorial.crunchbase_companies c
+LEFT JOIN tutorial.crunchbase_investments i
+    ON c.permalink = i.company_permalink
+WHERE  c.state_code = 'NY'
+GROUP BY 1, 2
+ORDER BY 3 DESC;
 
 /* Write a query that lists investors based on the number of companies in which they
  are invested. Include a row for companies with no investor, and order from most
  companies to least. */
 
-
+SELECT 	CASE WHEN i.investor_name IS NULL THEN 'No Investors'
+		ELSE i.investor_name END AS investor,
+        COUNT(DISTINCT c.permalink) AS companies_invested_in
+FROM tutorial.crunchbase_companies c
+LEFT JOIN tutorial.crunchbase_investments i
+    ON c.permalink = i.company_permalink
+GROUP BY 1
+ORDER BY 2 DESC;
  
  
  
