@@ -125,7 +125,69 @@ FROM tutorial.sf_crime_incidents_2014_01;
 
 -- Changing case with UPPER and LOWER
 
+SELECT incidnt_num,
+       address,
+       UPPER(address) AS address_upper,
+       LOWER(address) AS address_lower
+FROM tutorial.sf_crime_incidents_2014_01;
 
+/* Write a query that returns the `category` field, but with the
+ first letter capitalized and the rest of the letters in lower-case.*/
+ 
+SELECT 	incidnt_num,
+		category,
+		CONCAT (UPPER(LEFT(category, 1)), 
+				LOWER(SUBSTR(category, 2))) -- third argument is left empty, so it will go till the end;
+                AS capitalized_category
+FROM tutorial.sf_crime_incidents_2014_01;
+-- or:
+SELECT incidnt_num,
+       category,
+       UPPER(LEFT(category, 1)) || 
+       LOWER(RIGHT(category, LENGTH(category) - 1)) 
+       AS category_cleaned
+FROM tutorial.sf_crime_incidents_2014_01;
+
+-- Turning strings into dates
+
+SELECT incidnt_num,
+       date,
+       (SUBSTR(date, 7, 4) || '-' || LEFT(date, 2) ||
+        '-' || SUBSTR(date, 4, 2))::date AS cleaned_date
+FROM tutorial.sf_crime_incidents_2014_01;
+
+/* Write a query that creates an accurate timestamp using 
+the date and time columns in tutorial.sf_crime_incidents_2014_01.
+ Include a field that is exactly 1 week later as well. */
+ 
+SELECT incidnt_num,
+       (SUBSTR(date, 7, 4) || '-' || LEFT(date, 2) ||
+        '-' || SUBSTR(date, 4, 2) || ' ' || time || ':00')::timestamp AS timestamp,
+       (SUBSTR(date, 7, 4) || '-' || LEFT(date, 2) ||
+        '-' || SUBSTR(date, 4, 2) || ' ' || time || ':00')::timestamp
+        + INTERVAL '1 week' AS timestamp_plus_interval
+FROM tutorial.sf_crime_incidents_2014_01;
+ 
+ -- Turning dates into more useful dates
+ 
+SELECT *
+FROM tutorial.sf_crime_incidents_cleandate;
+
+/* You've learned how to construct a date field, but what if you want to deconstruct one?
+ You can use EXTRACT to pull the pieces apart one-by-one: */
+ 
+ SELECT cleaned_date,
+		EXTRACT('year'   FROM cleaned_date) AS year,
+		EXTRACT('month'  FROM cleaned_date) AS month,
+		EXTRACT('day'    FROM cleaned_date) AS day,
+		EXTRACT('hour'   FROM cleaned_date) AS hour,
+		EXTRACT('minute' FROM cleaned_date) AS minute,
+		EXTRACT('second' FROM cleaned_date) AS second,
+		EXTRACT('decade' FROM cleaned_date) AS decade,
+		EXTRACT('dow'    FROM cleaned_date) AS day_of_week
+ FROM tutorial.sf_crime_incidents_cleandate;
+ 
+ 
 
 
 
