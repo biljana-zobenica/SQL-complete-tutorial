@@ -96,9 +96,41 @@ SELECT incidnt_num,
        LEFT(date, 10) AS cleaned_date,
        CONCAT(day_of_week, ', ', LEFT(date, 10)) AS day_and_date
 FROM tutorial.sf_crime_incidents_2014_01;
+-- or by using || instead of CONCAT function:
+SELECT incidnt_num,
+       day_of_week,
+       LEFT(date, 10) AS cleaned_date,
+       day_of_week || ', ' || LEFT(date, 10) AS day_and_date
+  FROM tutorial.sf_crime_incidents_2014_01;
 
 /* Concatenate the lat and lon fields to form a field that is equivalent to the location field. (Note 
 that the answer will have a different decimal precision.) */
+
+SELECT CONCAT('(', lat,', ', lon, ')') AS concat_location,
+		location
+FROM tutorial.sf_crime_incidents_2014_01;
+
+/* Create the same concatenated location field, but using the || syntax instead of CONCAT. */
+
+SELECT ('(' || lat || ', ' || lon || ')') AS concat_location,
+		location
+FROM tutorial.sf_crime_incidents_2014_01;
+
+/* Write a query that creates a date column formatted YYYY-MM-DD.*/
+
+SELECT  incidnt_num,
+		date,
+		SUBSTR(date, 7, 4) || '-' || LEFT(date, 2) || '-' || SUBSTR(date, 4, 2) AS cleaned_date
+FROM tutorial.sf_crime_incidents_2014_01;
+
+-- Changing case with UPPER and LOWER
+
+
+
+
+
+
+
 
 
  
