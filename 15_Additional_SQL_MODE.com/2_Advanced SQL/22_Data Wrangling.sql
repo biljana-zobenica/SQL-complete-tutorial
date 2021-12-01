@@ -187,14 +187,63 @@ FROM tutorial.sf_crime_incidents_cleandate;
 		EXTRACT('dow'    FROM cleaned_date) AS day_of_week
  FROM tutorial.sf_crime_incidents_cleandate;
  
+ /* You can also round dates to the nearest unit of measurement. This is particularly useful
+ if you don't care about an individual date, but do care about the week (or month, or quarter)
+ that it occurred in. The DATE_TRUNC function rounds a date to whatever precision you specify.
+ The value displayed is the first value in that period. So when you DATE_TRUNC by year, any
+ value in that year will be listed as January 1st of that year: */
  
+SELECT cleaned_date,
+       DATE_TRUNC('year'   , cleaned_date) AS year,
+       DATE_TRUNC('month'  , cleaned_date) AS month,
+       DATE_TRUNC('week'   , cleaned_date) AS week,
+       DATE_TRUNC('day'    , cleaned_date) AS day,
+       DATE_TRUNC('hour'   , cleaned_date) AS hour,
+       DATE_TRUNC('minute' , cleaned_date) AS minute,
+       DATE_TRUNC('second' , cleaned_date) AS second,
+       DATE_TRUNC('decade' , cleaned_date) AS decade
+FROM tutorial.sf_crime_incidents_cleandate;
 
+/* Write a query that counts the number of incidents reported by week. Cast the week as a date 
+to get rid of the hours/minutes/seconds. */
 
+SELECT DATE_TRUNC('week', cleaned_date)::date AS week_beginning,
+       COUNT(*) AS incidents
+FROM tutorial.sf_crime_incidents_cleandate
+GROUP BY 1
+ORDER BY 1;
 
-
-
-
-
+SELECT CURRENT_DATE AS date,
+       CURRENT_TIME AS time,
+       CURRENT_TIMESTAMP AS timestamp,
+       LOCALTIME AS localtime,
+       LOCALTIMESTAMP AS localtimestamp,
+       NOW() AS now;
  
+-- You can make a time appear in a different time zone using AT TIME ZONE:
+
+SELECT CURRENT_TIME AS time,
+       CURRENT_TIME AT TIME ZONE 'PST' AS time_pst;
+
+/* Write a query that shows exactly how long ago each indicent was reported.
+ Assume that the dataset is in Pacific Standard Time (UTC - 8).*/
  
+SELECT incidnt_num,
+       cleaned_date,
+       NOW() AT TIME ZONE 'PST' AS now,
+       NOW() AT TIME ZONE 'PST' - cleaned_date AS time_ago 
+FROM tutorial.sf_crime_incidents_cleandate;
+
+-- COALESCE
+
+/* Occasionally, you will end up with a dataset that has some nulls that you'd
+ prefer to contain actual values. This happens frequently in numerical data 
+ (displaying nulls as 0 is often preferable), and when performing outer joins 
+ that result in some unmatched rows. In cases like this, you can use COALESCE 
+ to replace the null values: */
  
+SELECT incidnt_num,
+       descript,
+       COALESCE(descript, 'No Description')
+FROM tutorial.sf_crime_incidents_cleandate
+ORDER BY descript DESC;
