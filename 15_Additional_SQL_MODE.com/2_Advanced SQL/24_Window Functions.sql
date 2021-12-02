@@ -187,3 +187,5 @@ ORDER BY start_terminal, duration_seconds;
 -- The WINDOW clause, if included, should always come after the WHERE clause.
 
 
+
+
