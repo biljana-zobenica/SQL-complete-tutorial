@@ -49,6 +49,17 @@ CREATE TABLE orders
             ON DELETE NO ACTION
 	);
     
+-- create and drop relationships between table that already exists
+
+ALTER TABLE orders
+	ADD PRIMARY KEY (order_id),
+    DROP PRIMARY KEY, -- when dropping primary key, we don't need to specify name of the columns
+	DROP FOREIGN KEY fk_orders_customers,
+    ADD FOREIGN KEY fk_orders_customers (customers_id)
+		REFERENCES customers (customer_id)
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION;
+    
     
     
     
