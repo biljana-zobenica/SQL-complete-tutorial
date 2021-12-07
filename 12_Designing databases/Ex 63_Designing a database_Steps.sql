@@ -16,8 +16,11 @@ DROP DATABASE IF EXISTS sql_store2;
 
 -- create a table
 
+CREATE DATABASE IF NOT EXISTS sql_store2;
 USE sql_store2;
+DROP TABLE IF EXISTS orders; -- because we cannot delete customers table first, since it is dependent on the relationship with orders table;
 DROP TABLE IF EXISTS customers; -- or CREATE TABLE IF NOT EXISTS customers
+
 CREATE TABLE customers
 	(
 		customer_id 	INT PRIMARY KEY AUTO_INCREMENT,
@@ -33,6 +36,18 @@ ALTER TABLE customers
     ADD city 		VARCHAR(50) NOT NULL,
     MODIFY COLUMN first_name VARCHAR(55) DEFAULT '',
     DROP points;
+    
+-- create relationships
+-- DROP TABLE IF EXISTS orders; -- or CREATE TABLE IF NOT EXISTS customers
+CREATE TABLE orders
+	(
+		order_id 		INT PRIMARY KEY,
+		customer_id		INT NOT NULL,
+        FOREIGN KEY fk_orders_customers (customer_id) -- fk_childTable_customersTable
+			REFERENCES customers (customer_id)
+            ON UPDATE CASCADE -- or SET NULL, NO ACTION
+            ON DELETE NO ACTION
+	);
     
     
     
