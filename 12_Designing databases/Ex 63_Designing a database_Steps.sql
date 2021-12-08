@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS customers; -- or CREATE TABLE IF NOT EXISTS customers
 CREATE TABLE customers
 	(
 		customer_id 	INT PRIMARY KEY AUTO_INCREMENT,
-		first_name 		VARCHAR(50) NOT NULL,
+		first_name 		VARCHAR(50) CHARACTER SET latin1 NOT NULL,
         points			INT NOT NULL DEFAULT 0,
         email			VARCHAR(255) NOT NULL UNIQUE
 	);
@@ -59,9 +59,26 @@ ALTER TABLE orders
 		REFERENCES customers (customer_id)
         ON UPDATE CASCADE
         ON DELETE NO ACTION;
-    
-    
-    
+
+-- CHARACTER SETS AND COLLATIONS
+
+SHOW CHARSET;
+CHAR(10) -> 10 X 3 = 30 BITES X 1000000 = 30M
+
+CREATE DATABASE db_name
+	CHARACTER SET latin1;
+
+ALTER DATABASE db_name
+	CHARACTER SET latin1;
+
+-- the same goes to tables
+
+CREATE TABLE table1
+CHARACTER SET latin1;
+
+ALTER TABLE table1
+CHARACTER SET latin1;
+
     
     
     
