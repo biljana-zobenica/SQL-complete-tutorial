@@ -1,0 +1,38 @@
+
+--> 'NORMAL' algebra
+-- elements: 0, 25, 100...
+-- operators: + - / *
+-- operations: 2 + 5 = 7
+
+--> BOOLEAN algebra
+-- elements: TRUE, FALSE
+-- operators: NOT, AND, OR
+-- operation: TRUE AND FALSE = FALSE
+
+-- TRUTH table:
+-- NOT TRUE = FALSE
+-- NOT FALSE = TRUE
+
+--> Logical Conjunction (AND):
+-- TRUE AND FALSE = FALSE
+-- TRUE AND TRUE = TRUE
+-- FALSE AND FALSE = FALSE
+-- FALSE AND TRUE = FALSE
+
+--> Logical Disjunction (OR):
+-- TRUE OR FALSE = TRUE
+-- TRUE OR TRUE = TRUE
+-- FALSE OR FALSE = FALSE
+-- FALSE OR TRUE = TRUE
+
+--> Order of Operations: NOT, AND, OR
+--> First solve the brackets
+
+SELECT NOT(TRUE AND NOT FALSE OR FALSE AND (TRUE OR TRUE) AND TRUE) OR (TRUE AND (FALSE AND TRUE))
+
+-- NOT(TRUE AND NOT FALSE OR FALSE AND TRUE AND TRUE) OR (TRUE AND FALSE)
+-- NOT(TRUE AND TRUE OR FALSE AND TRUE AND TRUE) OR FALSE
+-- NOT(TRUE OR FALSE AND TRUE) OR FALSE
+-- NOT(TRUE OR FALSE) OR FALSE
+-- NOT(TRUE) OR FALSE
+-- FALSE OR FALSE -> FALSE
