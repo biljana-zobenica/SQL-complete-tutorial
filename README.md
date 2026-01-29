@@ -1,7 +1,7 @@
 # SQL-complete-tutorial
 This is a comprehensive SQL tutorial by Mosh Hamedani that covers both fundamentals and advanced topics.
 
-It covers the following topics:
+From modules 01 to 14, course covers the following topics:
 * Complex SQL queries
 * Joins (inner, outer, natural, cross)
 * Views
