@@ -1,5 +1,5 @@
 # SQL-complete-tutorial
-A SQL complete tutorial, from beginner to advanced, covering MySQL database fundamentals and advanced topics. It's created by Mosh Hamedani.
+This is a comprehensive SQL tutorial by Mosh Hamedani that covers both fundamentals and advanced topics.
 
 It covers the following topics:
 * Complex SQL queries
